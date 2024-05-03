@@ -8,7 +8,6 @@ import { SignIn } from './src/screens';
 import {ANDROID_CLINT_ID} from '@env'
 
 export default function App() {
-  console.log(ANDROID_CLINT_ID)
   const [fontsLoaded] = useFonts({Roboto_400Regular, Roboto_700Bold})
 
   if(!fontsLoaded)

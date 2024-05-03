@@ -1,12 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import backgroundImage from '../../assets/background.png';
 
-import { View, Text, ImageBackground } from 'react-native'
+import {GoogleSignin} from '@react-native-google-signin/google-signin'
+
+import { Text, ImageBackground, Alert } from 'react-native'
 import { theme } from '../../theme'
 import { Button } from '../../components';
+import { IOS_CLIENT_ID, WEB_CLIENT_ID } from '@env';
+
+GoogleSignin.configure({
+  scopes: ['email', 'profile'],
+  webClientId: WEB_CLIENT_ID,
+  iosClientId: IOS_CLIENT_ID
+})
 
 export function SignIn() {
+  const [isAuthenticating, setIsAuthenticating] = useState(false)
+
+
+  async function handleGoogleSignIn() {
+    try {
+      setIsAuthenticating(true)
+
+      const response = await GoogleSignin.signIn()
+      console.log(response)
+
+    } catch (error) {
+      console.error(error)
+      Alert.alert('Alerta!', 'Não foi possível conectar-se sua conta google.')
+    } finally {
+      setIsAuthenticating(false)
+    }
+
+  }
+
   return (
     <ImageBackground source={backgroundImage} style={{flex:1,
         justifyContent: 'center',
@@ -23,7 +51,10 @@ export function SignIn() {
          fontFamily: theme.FONT_FAMILY.REGULAR,
          textAlign: 'center'}}>Gestão de uso de veículos</Text>
 
-      <Button title='Entrar com Google'/>
+      <Button 
+      onPress={handleGoogleSignIn}
+      title='Entrar com Google' 
+      isLoading={isAuthenticating}/>
     </ImageBackground>
   )
 }
