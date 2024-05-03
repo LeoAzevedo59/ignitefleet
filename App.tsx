@@ -5,7 +5,10 @@ import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/
 import { Loading, StatusBar } from './src/components';
 import { SignIn } from './src/screens';
 
+import {ANDROID_CLINT_ID} from '@env'
+
 export default function App() {
+  console.log(ANDROID_CLINT_ID)
   const [fontsLoaded] = useFonts({Roboto_400Regular, Roboto_700Bold})
 
   if(!fontsLoaded)
