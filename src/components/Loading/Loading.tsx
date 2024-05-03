@@ -4,8 +4,8 @@ import { theme } from '../../theme'
 
 export function Loading() {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.COLORS.GRAY_800}}>
-    <ActivityIndicator color={theme.COLORS.BRAND_LIGHT}/>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <ActivityIndicator color={theme.COLORS.WHITE}/>
     </View>
   )
 }
