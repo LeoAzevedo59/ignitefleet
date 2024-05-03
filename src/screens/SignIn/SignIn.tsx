@@ -23,15 +23,22 @@ export function SignIn() {
     try {
       setIsAuthenticating(true)
 
-      const response = await GoogleSignin.signIn()
-      console.log(response)
+      const {idToken} = await GoogleSignin.signIn()
+
+
+      if(idToken)
+      {
+        //
+      }else {
+        Alert.alert('Alerta!', 'Não foi possível conectar-se sua conta google.')
+        setIsAuthenticating(false)
+      }
 
     } catch (error) {
       console.error(error)
       Alert.alert('Alerta!', 'Não foi possível conectar-se sua conta google.')
-    } finally {
       setIsAuthenticating(false)
-    }
+    } 
 
   }
 
