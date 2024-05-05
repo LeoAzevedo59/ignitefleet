@@ -3,9 +3,11 @@
 
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import { Loading, StatusBar } from './src/components';
-import { SignIn } from './src/screens';
+import { Home, SignIn } from './src/screens';
 
-import {ANDROID_CLINT_ID} from '@env'
+import {AppProvider, UserProvider} from '@realm/react'
+
+import {ANDROID_CLINT_ID, REALM_APP_ID} from '@env'
 
 export default function App() {
   const [fontsLoaded] = useFonts({Roboto_400Regular, Roboto_700Bold})
@@ -21,10 +23,13 @@ export default function App() {
     }
 
   return (
-    <>
+    <AppProvider id={REALM_APP_ID}>
       <StatusBar/>
-      <SignIn/>
-    </>
+
+      <UserProvider fallback={SignIn}> 
+        <Home/>
+      </UserProvider>
+    </AppProvider>
   );
 }
 
